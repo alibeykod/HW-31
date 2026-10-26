@@ -3,7 +3,7 @@ package ir.maktabsharif.service.auxiliaryServices.sessionService;
 import jakarta.servlet.http.HttpSession;
 
 public class Session {
-    public Integer visitCount(HttpSession session){
+    public Integer incrementVisitCount(HttpSession session){
         Integer visitCount = (Integer)session.getAttribute("visitCount");
         if (visitCount == null){
             visitCount = 1;

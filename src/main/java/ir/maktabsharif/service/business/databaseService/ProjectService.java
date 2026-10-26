@@ -13,13 +13,14 @@ import java.util.stream.Collectors;
 public class ProjectService {
     private final ProjectRepositoryImpl repository = new ProjectRepositoryImpl(ProjectDAO.class);
 
-    public void add(ProjectRequestDTO projectRequestDTO){
-        repository.add(Convertor.ProjectRequestDtoToProjectDao(projectRequestDTO));
+    public ProjectResponseDTO add(ProjectRequestDTO projectRequestDTO) {
+        ProjectDAO projectDAO = repository.add(Convertor.ProjectRequestDtoToProjectDao(projectRequestDTO));
+        return Convertor.ProjectDaoToProjectResponseDto(projectDAO);
     }
 
-    public ProjectResponseDTO findById(Long id){
+    public ProjectResponseDTO findById(Long id) {
         Optional<ProjectDAO> toFound = repository.findById(id);
-        if (!toFound.isPresent()){
+        if (!toFound.isPresent()) {
             System.out.println("Project With Id => [" + id + "] Did Not Found !!!");
             return null;
         }
@@ -27,14 +28,14 @@ public class ProjectService {
         return Convertor.ProjectDaoToProjectResponseDto(projectFound);
     }
 
-    public List<ProjectResponseDTO> findAll(){
+    public List<ProjectResponseDTO> findAll() {
         return repository.findAll()
                 .stream()
                 .map(Convertor::ProjectDaoToProjectResponseDto)
                 .collect(Collectors.toList());
     }
 
-    public List<ProjectResponseDTO> findByManagerId(Long managerId){
+    public List<ProjectResponseDTO> findByManagerId(Long managerId) {
         return repository.findByManagerId(managerId).stream()
                 .map(Convertor::ProjectDaoToProjectResponseDto)
                 .collect(Collectors.toList());

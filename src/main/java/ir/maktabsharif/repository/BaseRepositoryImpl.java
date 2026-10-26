@@ -12,8 +12,9 @@ public abstract class BaseRepositoryImpl <T> implements BaseRepository<T>{
         this.entityClass = entityClass;
     }
     @Override
-    public void add(T t) {
+    public T add(T t) {
         HibernateUtil.inTx(entityManager -> entityManager.persist(t));
+        return t;
     }
 
     @Override

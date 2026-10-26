@@ -13,21 +13,22 @@ import java.util.stream.Collectors;
 public class UserService {
     private final UserRepositoryImpl repository = new UserRepositoryImpl(UserDAO.class);
 
-    public void add(UserRequestDTO userRequestDTO) {
-        repository.add(Convertor.userReqDtoToUserDao(userRequestDTO));
+    public UserResponseDTO add(UserRequestDTO userRequestDTO) {
+        UserDAO userDAO = repository.add(Convertor.userReqDtoToUserDao(userRequestDTO));
+        return Convertor.userDaoToUserResponseDTO(userDAO);
     }
 
-    public UserResponseDTO findById(Long id){
+    public UserResponseDTO findById(Long id) {
         Optional<UserDAO> foundUser = repository.findById(id);
-        if(!foundUser.isPresent()){
-            System.out.println("User With Id => ["+ id + "] Didn't Found In Database !!!");
+        if (!foundUser.isPresent()) {
+            System.out.println("User With Id => [" + id + "] Didn't Found In Database !!!");
             return null;
         }
         UserDAO toClient = foundUser.get();
         return Convertor.userDaoToUserResponseDTO(toClient);
     }
 
-    public List<UserResponseDTO> findAll(){
+    public List<UserResponseDTO> findAll() {
         return repository.findAll()
                 .stream()
                 .map(Convertor::userDaoToUserResponseDTO)

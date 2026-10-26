@@ -11,8 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class ValidatorTask {
+
     private final TaskService taskService = new TaskService();
+
     private final TaskRepositoryImpl taskRepository;
+
     public ValidatorTask(TaskRepositoryImpl taskRepository) {
         this.taskRepository = taskRepository;
     }
@@ -35,9 +38,9 @@ public class ValidatorTask {
         }
     }
 
-    public void add(TaskRequestDTO taskRequestDTO) throws Business{
+    public TaskResponseDTO add(TaskRequestDTO taskRequestDTO) throws Business{
         validations(taskRequestDTO);
-        taskService.add(taskRequestDTO);
+        return taskService.add(taskRequestDTO);
     }
 
     public TaskResponseDTO update(TaskRequestDTO taskRequestDTO , Long id)throws Business{

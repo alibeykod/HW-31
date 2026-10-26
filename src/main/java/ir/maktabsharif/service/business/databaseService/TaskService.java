@@ -14,8 +14,9 @@ public class TaskService {
 
     protected final TaskRepositoryImpl repository = new TaskRepositoryImpl(TaskDAO.class);
 
-    public void add(TaskRequestDTO taskRequestDTO) {
-        repository.add(Convertor.TaskRequestDTOToTaskDao(taskRequestDTO));
+    public TaskResponseDTO add(TaskRequestDTO taskRequestDTO) {
+        TaskDAO taskDAO = repository.add(Convertor.TaskRequestDTOToTaskDao(taskRequestDTO));
+        return Convertor.TaskDaoToTaskResponseDTO(taskDAO);
     }
 
     public TaskResponseDTO update(TaskRequestDTO taskRequestDTO, Long id) {
@@ -39,7 +40,7 @@ public class TaskService {
                 collect(Collectors.toList());
     }
 
-    public List<TaskResponseDTO> findByProjectId(Long id){
+    public List<TaskResponseDTO> findByProjectId(Long id) {
         List<TaskDAO> tasksWithProjectId = repository.findByProjectId(id);
         return tasksWithProjectId
                 .stream()
@@ -53,24 +54,24 @@ public class TaskService {
                 .orElse(null);
     }
 
-    public List<TaskResponseDTO> findAll(){
+    public List<TaskResponseDTO> findAll() {
         return repository.findAll()
                 .stream().
                 map(Convertor::TaskDaoToTaskResponseDTO).
                 collect(Collectors.toList());
     }
 
-    public boolean delete(Long id){
+    public boolean delete(Long id) {
         Optional<TaskDAO> found = repository.findById(id);
-        if (!found.isPresent()){
-            System.out.println("Task With Id : [" +id+"] Didn't Find");
+        if (!found.isPresent()) {
+            System.out.println("Task With Id : [" + id + "] Didn't Find");
             return false;
         }
 
         try {
             repository.delete(id);
             return true;
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             System.out.println("Task Did Not Delete !!!" + e.getMessage());
             return false;
         }

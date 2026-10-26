@@ -7,13 +7,13 @@
     <groupId>ir.maktabsharif</groupId>
     <artifactId>Ali_RafiBeyk_HW31_Maktab146</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Ali_Moradi_HW31_Maktab146</name>
+    <name>Ali_RafiBeyk_HW31_Maktab146</name>
     <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>8</maven.compiler.target>
-        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
         <junit.version>5.11.0</junit.version>
     </properties>
 

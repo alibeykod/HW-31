@@ -3,13 +3,22 @@ package ir.maktabsharif.service.business.validationService;
 import ir.maktabsharif.exception.Business;
 import ir.maktabsharif.model.dto.request.UserRequestDTO;
 import ir.maktabsharif.model.dto.response.UserResponseDTO;
+import ir.maktabsharif.repository.impl.TaskRepositoryImpl;
+import ir.maktabsharif.repository.impl.UserRepositoryImpl;
 import ir.maktabsharif.service.business.databaseService.UserService;
 
 import java.util.List;
 import java.util.Optional;
 
 public class ValidatorUser {
+
     private final UserService userService = new UserService();
+
+    private final UserRepositoryImpl userRepository;
+
+    public ValidatorUser(UserRepositoryImpl userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public void validations(UserRequestDTO userRequestDTO) throws Business {
         if (userRequestDTO == null) {
@@ -26,9 +35,9 @@ public class ValidatorUser {
         }
     }
 
-    public void add(UserRequestDTO userRequestDTO) throws Business {
+    public UserResponseDTO add(UserRequestDTO userRequestDTO) throws Business {
         validations(userRequestDTO);
-        userService.add(userRequestDTO);
+        return userService.add(userRequestDTO);
     }
 
     public Optional<UserResponseDTO> findById(Long id) throws Business {
@@ -39,10 +48,6 @@ public class ValidatorUser {
     }
 
     public List<UserResponseDTO> findAll() throws Business {
-        List<UserResponseDTO> users = userService.findAll();
-        if (users == null || users.isEmpty()) {
-            throw new Business("No User Was Found !!!");
-        }
-        return users;
+        return userService.findAll();
     }
 }
