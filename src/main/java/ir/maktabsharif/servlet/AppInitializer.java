@@ -61,7 +61,7 @@ public class AppInitializer implements ServletContextListener {
                 validatorUser.findAll().forEach(System.out::println);
             }
         } catch (Business e) {
-            throw new RuntimeException("Failed to seed initial data in AppInitializer", e);
+            throw new RuntimeException("Failed to initial data in AppInitializer", e);
         }
 
 

@@ -44,6 +44,7 @@ public class Convertor {
 
     public static ProjectResponseDTO ProjectDaoToProjectResponseDto(ProjectDAO projectDAO){
         return ProjectResponseDTO.builder()
+                .id(projectDAO.getId())
                 .managerId(projectDAO.getManagerId())
                 .name(projectDAO.getName())
                 .description(projectDAO.getDescription())

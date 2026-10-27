@@ -25,5 +25,16 @@ public class ProjectRepositoryImpl extends BaseRepositoryImpl<ProjectDAO> {
 
     }
 
+    public String findProjectNameWithProjectId(Long id){
+        return HibernateUtil.read(entityManager -> {
+            ProjectDAO found = entityManager.find(ProjectDAO.class , id);
+            if (found == null){
+                System.out.println("Didn't Found The Project With this Id => " + id);
+                return null;
+            }
+            return found.getName();
+        });
+    }
+
 
 }

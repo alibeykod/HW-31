@@ -5,6 +5,7 @@ import ir.maktabsharif.model.dao.ProjectDAO;
 import ir.maktabsharif.model.dto.request.ProjectRequestDTO;
 import ir.maktabsharif.model.dto.response.ProjectResponseDTO;
 import ir.maktabsharif.repository.impl.ProjectRepositoryImpl;
+import ir.maktabsharif.util.HibernateUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,5 +40,9 @@ public class ProjectService {
         return repository.findByManagerId(managerId).stream()
                 .map(Convertor::ProjectDaoToProjectResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    public String findProjectNameWithProjectId(Long id){
+        return repository.findProjectNameWithProjectId(id);
     }
 }

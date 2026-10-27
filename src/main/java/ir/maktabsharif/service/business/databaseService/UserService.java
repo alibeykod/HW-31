@@ -5,6 +5,7 @@ import ir.maktabsharif.model.dao.UserDAO;
 import ir.maktabsharif.model.dto.request.UserRequestDTO;
 import ir.maktabsharif.model.dto.response.UserResponseDTO;
 import ir.maktabsharif.repository.impl.UserRepositoryImpl;
+import ir.maktabsharif.util.HibernateUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,10 @@ public class UserService {
                 .stream()
                 .map(Convertor::userDaoToUserResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+    public String findAssigneeNameWithTaskId(Long id) {
+        return repository.findAssigneeNameWithTaskId(id);
     }
 }
 

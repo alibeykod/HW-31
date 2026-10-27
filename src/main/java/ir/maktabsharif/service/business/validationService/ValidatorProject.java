@@ -1,10 +1,12 @@
 package ir.maktabsharif.service.business.validationService;
 
 import ir.maktabsharif.exception.Business;
+import ir.maktabsharif.model.dao.ProjectDAO;
 import ir.maktabsharif.model.dto.request.ProjectRequestDTO;
 import ir.maktabsharif.model.dto.response.ProjectResponseDTO;
 import ir.maktabsharif.repository.impl.ProjectRepositoryImpl;
 import ir.maktabsharif.service.business.databaseService.ProjectService;
+import ir.maktabsharif.util.HibernateUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,9 +41,9 @@ public class ValidatorProject {
         return projectService.add(projectRequestDTO);
     }
 
-    public Optional<ProjectResponseDTO> findById(Long id) throws Business {
+    public Optional<ProjectResponseDTO> findById(Long id) {
         if (id == null || id < 0) {
-            throw new Business("No Id Found In Request !!!");
+            System.out.println("No Id Found In Request !!!");
         }
         return Optional.ofNullable(projectService.findById(id));
     }
@@ -57,11 +59,19 @@ public class ValidatorProject {
         return projects;
     }
 
-    public List<ProjectResponseDTO> findAll() throws Business {
+    public List<ProjectResponseDTO> findAll() {
         List<ProjectResponseDTO> projects = projectService.findAll();
         if (projects == null || projects.isEmpty()) {
-            throw new Business("No Project Found !!!");
+            System.out.println("No Project Found !!!");
         }
         return projects;
+    }
+
+    public String findProjectNameWithProjectId(Long id){
+        if (id == null){
+            System.out.println("This Id Was Null !!!!");
+            return null;
+        }
+        return projectService.findProjectNameWithProjectId(id);
     }
 }

@@ -40,14 +40,26 @@ public class ValidatorUser {
         return userService.add(userRequestDTO);
     }
 
-    public Optional<UserResponseDTO> findById(Long id) throws Business {
+    public Optional<UserResponseDTO> findById(Long id) {
         if (id == null) {
-            throw new Business("Id Was Null !!!!");
+            System.out.println("Id Was Null !!!!");
         }
         return Optional.ofNullable(userService.findById(id));
     }
 
-    public List<UserResponseDTO> findAll() throws Business {
+    public List<UserResponseDTO> findAll() {
         return userService.findAll();
     }
+
+    public String findAssigneeNameWithTaskId(Long id) {
+        if (id == null){
+            System.out.println(" ID Was Null !!!!");
+            return null;
+        }try {
+            return userService.findAssigneeNameWithTaskId(id);
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
 }

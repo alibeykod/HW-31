@@ -10,6 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 
 public class ProjectResponseDTO {
+    private Long id;
+
     private Long managerId;
 
     private String name;

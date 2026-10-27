@@ -17,7 +17,7 @@ public class LoggingFilter implements Filter {
         logService = new LogService();
         String prefix = filterConfig.getInitParameter("logPrefix");
         if (prefix == null) {
-            prefix = "DEFAULT-PREFIX"; // مقدار پیش‌فرض برای جلوگیری از نال‌پوینتر
+            prefix = "DEFAULT-PREFIX";
         }
         logService.setPrefix(prefix);
     }

@@ -55,24 +55,24 @@ public class ValidatorTask {
         return Optional.ofNullable(taskService.findById(id));
     }
 
-    public List<TaskResponseDTO> findByAssigneeId(Long id)throws Business{
+    public List<TaskResponseDTO> findByAssigneeId(Long id){
         if (id == null){
-            throw new Business("Id Can Not Be Null !!!");
+            System.out.println("Id Can Not Be Null !!!");
         }
         List<TaskResponseDTO> tasks = taskService.findByAssigneeId(id);
         if (tasks == null || tasks.isEmpty()){
-            throw new Business("No Task Was Found !!!");
+            System.out.println("No Task Was Found !!!");
         }
         return tasks;
     }
 
-    public List<TaskResponseDTO> findByProjectId(Long id)throws Business{
+    public List<TaskResponseDTO> findByProjectId(Long id){
         if (id == null){
-            throw new Business("Id Can Not Be Null !!!");
+            System.out.println("Id Can Not Be Null !!!");
         }
         List<TaskResponseDTO> tasks = taskService.findByProjectId(id);
         if (tasks == null || tasks.isEmpty()){
-            throw new Business("No Task Found !!!!");
+            System.out.println("No Task Found !!!!");
         }
         return tasks;
     }
@@ -85,10 +85,10 @@ public class ValidatorTask {
         return true;
     }
 
-    public List<TaskResponseDTO> findAll()throws Business{
+    public List<TaskResponseDTO> findAll(){
         List<TaskResponseDTO> tasks = taskService.findAll();
         if (tasks == null || tasks.isEmpty()){
-            throw new Business("No Task Was Found !!!");
+            System.out.println("No Task Was Found !!!");
         }
         return tasks;
     }
